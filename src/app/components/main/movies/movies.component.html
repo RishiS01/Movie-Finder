@@ -1,0 +1,71 @@
+<section class="container ">
+  <div class="example-container">
+    <mat-form-field>
+      <input matInput placeholder="Search for Movies..." [(ngModel)]="searchStr" (keyup.enter)="searchMovies()">
+      <button mat-button *ngIf="searchStr" matSuffix mat-icon-button aria-label="clear" (click)="searchStr =''">
+        <mat-icon>clear</mat-icon>
+      </button>
+      <button *ngIf="searchStr" matSuffix mat-icon-button aria-label="search" (click)="searchMovies()">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+</section>
+<section class="container" *ngIf='searchRes && searchStr '>
+  <ng-masonry-grid [masonryOptions]="masonryOptions" [useAnimation]="true" [useImagesLoaded]="true"
+    [scrollAnimationOptions]="{ animationEffect: 'effect-4', minDuration : 0.4, maxDuration : 0.7 }">
+    <ng-masonry-grid-item id="{{'masonry-item-'+i}}" *ngFor="let smovie of searchRes; let i = index;"
+      (click)="getMovieDetail(smovie.id)">
+      <img src="https://image.tmdb.org/t/p/w500/{{smovie.backdrop_path}}" alt="" *ngIf = "smovie.backdrop_path" />     
+     <!-- poster_path -->
+      <img src ="https://image.tmdb.org/t/p/w500/{{smovie.poster_path}}" *ngIf = "!smovie.backdrop_path && smovie.poster_path ">
+      <img src = "assets/img/not-available.png" *ngIf = "!smovie.poster_path && !smovie.backdrop_path">
+      <div class="movie-info">
+        <div>
+          <strong> {{smovie.title}}</strong>
+        </div>
+        <div>
+          <span>{{smovie.release_date}}</span>
+        </div>
+      </div>
+    </ng-masonry-grid-item>
+  </ng-masonry-grid>
+</section>
+<!-- Search section ends -->
+<section class="container">
+  <h3>Top Rated Movies</h3>
+  <ng-masonry-grid [masonryOptions]="masonryOptions" [useAnimation]="true" [useImagesLoaded]="true"
+    [scrollAnimationOptions]="{ animationEffect: 'effect-4', minDuration : 0.4, maxDuration : 0.7 }">
+
+    <ng-masonry-grid-item id="{{'masonry-item-'+i}}" *ngFor="let tmovie of topRatedList; let i = index;"
+      (click)="getMovieDetail(tmovie.id)">
+
+      <img src="https://image.tmdb.org/t/p/w500/{{tmovie.backdrop_path}}" alt="{{tmovie.title}}" />
+      <div class="movie-info">
+        <div>
+          <strong>{{tmovie.title}}</strong>
+        </div>
+        <div>
+          <span>{{tmovie.release_date}}</span>
+        </div>
+      </div>
+    </ng-masonry-grid-item>
+  </ng-masonry-grid>
+</section>
+<!-- <h3>Popular Movies</h3>
+<section class="container ">
+ 
+  <ng-masonry-grid [masonryOptions]="masonryOptions" [useAnimation]="true" [useImagesLoaded]="true"
+    [scrollAnimationOptions]="{ animationEffect: 'effect-4', minDuration : 0.4, maxDuration : 0.7 }">
+
+    <ng-masonry-grid-item id="{{'masonry-item-'+i}}" *ngFor="let pmovie of popularList; let i = index;"
+      (click)="getMovieDetail(pmovie.id)">
+
+      <img src="https://image.tmdb.org/t/p/w500/{{pmovie.backdrop_path}}" alt="No image" />
+      <div>
+        {{pmovie.title}}
+      </div>
+      <span>{{pmovie.release_date}}</span>
+    </ng-masonry-grid-item>
+  </ng-masonry-grid>
+</section> -->

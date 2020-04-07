@@ -1,0 +1,20 @@
+<section class="container ">
+    <ng-masonry-grid [masonryOptions]="masonryOptions" [useAnimation]="true" [useImagesLoaded]="true"
+        [scrollAnimationOptions]="{ animationEffect: 'effect-4', minDuration : 0.4, maxDuration : 0.7 }">
+
+        <ng-masonry-grid-item id="{{'masonry-item-'+i}}" *ngFor="let movie of movies; let i = index;"
+            (click)="getMovieDetail(movie.id)">
+
+            <img src="https://image.tmdb.org/t/p/w500/{{movie.backdrop_path}}" alt="No image" />
+            <div class="movie-info">
+               <div>
+                   <strong>{{movie.title}}</strong>
+               </div>
+               <div>
+                   <span>{{movie.release_date | date: 'mediumDate'}}</span>
+               </div>
+            </div>
+            <!-- <span></span> -->
+        </ng-masonry-grid-item>
+    </ng-masonry-grid>
+</section>

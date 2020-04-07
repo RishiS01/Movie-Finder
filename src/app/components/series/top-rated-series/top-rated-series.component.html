@@ -1,0 +1,20 @@
+<section>
+    <div class="container">
+        <ng-masonry-grid [masonryOptions]="masonryOptions" [useAnimation]="true" [useImagesLoaded]="true"
+            [scrollAnimationOptions]="{ animationEffect: 'effect-4', minDuration : 0.4, maxDuration : 0.7 }">
+
+            <ng-masonry-grid-item id="{{'masonry-item-'+i}}" *ngFor="let tseries of series; let i = index;"
+                (click)="getSeriesDetail(tseries.id)">
+                <img src="https://image.tmdb.org/t/p/w500/{{tseries.backdrop_path}}" alt="No image" />
+                <div class="series-info">
+                    <div>
+                        <strong>{{tseries.name}}</strong>
+                    </div>
+                    <div>
+                        <span><strong>Aired On: </strong> {{tseries.first_air_date}}</span>
+                    </div>
+                </div>
+            </ng-masonry-grid-item>
+        </ng-masonry-grid>
+    </div>
+</section>

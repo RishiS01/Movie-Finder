@@ -1,0 +1,30 @@
+mat-grid-tile {
+    background: red;
+  }
+
+  .example-card {
+    max-width: 400px;
+  }
+  
+  .example-header-image {
+    // background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+  ng-masonry-grid-item:hover {
+    // box-shadow:  grey 0px 12px 45px 2px;
+    box-shadow: 0 10px 17px 0 #9d9d9d;
+    cursor: pointer;
+  }
+  .movie-info {
+    margin: 10px;
+  }
+
+  .example-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .example-container > * {
+    width: 100%;
+  }
+  

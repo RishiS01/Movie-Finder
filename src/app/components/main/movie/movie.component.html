@@ -1,0 +1,164 @@
+<section>
+    <div class="overview-section">
+        <div class="row" *ngIf='movie'>
+            <div class="col-md-4">
+                <div class="poster-div">
+                    <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="{{movie.title}}">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="movie-title">
+                    <h2>
+                        {{movie.title}}
+                        <mat-chip color="accent" selected>
+                            <strong>{{movie.vote_average}}</strong>
+                            <mat-icon>star_rate </mat-icon>
+                        </mat-chip>
+                    </h2>
+                </div>
+                <mat-card class="overview-card">
+                    <mat-card-header>
+                        <mat-card-subtitle>
+                            Release Date:
+                            <strong>
+                                {{movie.release_date | date: 'mediumDate'}}
+                            </strong>
+                        </mat-card-subtitle>
+                        <mat-card-subtitle>
+                            <mat-chip-list aria-label="Production: ">
+                                Production:
+                                <mat-chip color="warn" selected *ngFor="let production of production_house">
+                                    {{production.name}}
+                                </mat-chip>
+                            </mat-chip-list>
+                        </mat-card-subtitle>
+                        <mat-card-subtitle>
+                            <mat-chip-list>
+                                <mat-chip color="primary" selected *ngFor="let gener of geners" routerLink="/genres/{{gener.id}}/{{gener.name}}">
+                                    {{gener.name}}
+                                </mat-chip>
+                            </mat-chip-list>
+                        </mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="overview-container">
+                            <h3>OverView</h3>
+                            <p>
+                                {{movie.overview}}
+                            </p>
+                        </div>
+                    </mat-card-content>
+                    <!-- <mat-card-actions>
+                        <div class="m-cast">
+                            <h4>Cast</h4>
+                            <ol class="cast">
+                                <li *ngFor="let actor of cast">
+                                    <a class="cast">
+                                        <img src="https://image.tmdb.org/t/p/w500/{{actor.profile_path}}" alt="">
+                                        <p class="actor-name"><strong>{{actor.name}}</strong></p>
+                                        <p class="actor-character">{{actor.character}}</p>
+                                    </a>
+                                </li>
+                            </ol>
+                        </div>
+                    </mat-card-actions> -->
+
+                    <mat-tab-group>
+                        <mat-tab label="Cast">
+                            <div class="m-cast">
+                                <ol class="cast">
+                                    <li *ngFor="let actor of cast">
+                                        <a class="cast" (click) = "actorDetails(actor)">
+                                            <img src="https://image.tmdb.org/t/p/w500/{{actor.profile_path}}" alt="">
+                                            <p class="actor-name"><strong>{{actor.name}}</strong></p>
+                                            <p class="actor-character">{{actor.character}}</p>
+                                        </a>
+                                    </li>
+                                    <li class="li-more-credits">
+                                        <div (click)="getMoreCredits('actor')" class="a-more-credits">
+                                            <button mat-fab> More..</button>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Crew">
+                            <div class="m-crew">
+                                <ol class="crew">
+                                    <li *ngFor="let person of crew">
+                                        <a class="crew">
+                                            <img src="https://image.tmdb.org/t/p/w500/{{person.profile_path}}" alt="">
+                                            <p class="actor-name"><strong>{{person.name}}</strong></p>
+                                            <p class="actor-character">{{person.job}}</p>
+                                        </a>
+                                    </li>
+                                    <li class="li-more-credits" >
+                                        <div (click)="getMoreCredits('crew')" class="a-more-credits">
+                                            <button mat-fab> More..</button>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <div class="mislanious-div">
+        <mat-card class="detail-card">
+            <mat-card-content>
+                <mat-tab-group mat-stretch-tabs class="stretched-tabs mat-elevation-z4">
+                    <mat-tab label="Similar Movies">
+                        <section class="container ">
+                            <ng-masonry-grid [masonryOptions]="masonryOptions" [useAnimation]="true"
+                                [useImagesLoaded]="true"
+                                [scrollAnimationOptions]="{ animationEffect: 'effect-4', minDuration : 0.4, maxDuration : 0.7 }">
+                                <ng-masonry-grid-item id="{{'masonry-item-'+i}}"
+                                    *ngFor="let smovie of similarMovies; let i = index;"
+                                    (click)="getMovieDetail(smovie.id)">
+                                    <img src="https://image.tmdb.org/t/p/w500/{{smovie.backdrop_path}}"
+                                        alt="No image" />
+                                    <div class="movie-info">
+                                        <div>
+                                            <strong>{{smovie.title}}</strong>
+                                        </div>
+                                        <div>
+                                            <span>{{smovie.release_date | date: 'mediumDate'}}</span>
+                                        </div>
+                                    </div>
+                                </ng-masonry-grid-item>
+                            </ng-masonry-grid>
+                        </section>
+                    </mat-tab>
+                    <mat-tab label="Video">
+                        <mat-card>
+                            <div class="container" *ngIf="video">
+                                <mat-card-content>
+                                    <h2>{{video.name}}</h2>
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        <iframe class="embed-responsive-item" [src]="video.url"></iframe>
+                                    </div>
+                                </mat-card-content>
+                            </div>
+                        </mat-card>
+                    </mat-tab>
+                    <mat-tab label="Reviews">
+                        <mat-card *ngFor="let review of reviews" class="container">
+                            <mat-card-content>
+                                <blockquote>
+                                    <p class="text-justify">{{review.content}}</p>
+                                    <footer>
+                                        <cite title="{{review.author}}">
+                                            <a href="{{review.url}}" target="_blank">{{review.author}}</a>
+                                        </cite>
+                                    </footer>
+                                </blockquote>
+                            </mat-card-content>
+                        </mat-card>
+                    </mat-tab>
+                </mat-tab-group>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</section>

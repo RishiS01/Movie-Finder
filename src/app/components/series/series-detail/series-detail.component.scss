@@ -1,0 +1,195 @@
+img {
+  width: 100%;
+  margin-top: 5px;
+}
+.overview-container {
+  padding: 12px;
+  border-bottom: 1px solid rgb(160, 160, 160);
+}
+.stretched-tabs {
+  max-width: 100%;
+}
+.detail-card {
+  margin: 40px 0px;
+}
+.overview-card {
+  box-shadow: none;
+}
+.text-justify {
+  padding: 10px;
+}
+mat-card {
+  padding: 0px 16px;
+}
+// footer {
+//   border-bottom: 1px solid rgb(160, 160, 160);
+// }
+section {
+  overflow-x: hidden;
+}
+.thumbnail {
+  max-width: 200px;
+}
+.cast,
+.crew {
+  list-style-type: none;
+  list-style-position: inside;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  li {
+    width: 140px;
+    background-color: #fff;
+    box-sizing: border-box;
+    margin-right: 10px;
+    padding-bottom: 10px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+    p {
+      font-size: 1em;
+      line-height: 1.4em;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .actor-name {
+      padding: 10px 10px 0 10px;
+    }
+    .actor-character {
+      padding: 0 10px;
+      font-size: 0.9em;
+    }
+    a {
+      width: 138px;
+      height: 175px;
+      display: block;
+    }
+  }
+  .li-more-credits {
+    background: transparent;
+  }
+}
+
+.m-cast,
+.m-crew {
+  // overflow-y: hidden;
+  height: 240px;
+  .a-more-credits {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    width: 138px;
+    height: 175px;
+
+    button {
+      white-space: initial;
+      background-color: #d0d0d052;
+    }
+  }
+}
+.mat-standard-chip {
+  transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  padding: 0px 8px;
+  border-radius: 4px;
+  align-items: center;
+  cursor: default;
+  min-height: 23px;
+  height: 1px;
+}
+.poster-div {
+  display: block;
+  width: 290px;
+  height: 100%;
+  margin: auto;
+  padding: 10px;
+  img {
+    box-shadow: 5px 7px 9px grey;
+  }
+}
+.movie-title {
+  text-align: center;
+  .material-icons {
+    color: #585858db;
+    padding: 2px 0px;
+    font-size: 20px;
+    font-weight: 700;
+  }
+  h2 {
+    padding: 20px;
+  }
+}
+.seasons-div {
+  h2 {
+    padding: 18px 10px 10px;
+  }
+}
+.grid {
+  max-width: 100%;
+  list-style: none;
+  margin: 15px auto;
+  padding: 0;
+}
+.mat-card {
+  background: transparent;
+}
+.credits-div {
+  list-style-type: none;
+  list-style-position: inside;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  li {
+    width: 140px;
+    background-color: #fff;
+    box-sizing: border-box;
+    margin-right: 10px;
+    padding-bottom: 10px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+    p {
+      font-size: 1em;
+      line-height: 1.4em;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .credit-name {
+      padding: 10px 10px 0 10px;
+    }
+    .credit-role {
+      padding: 0 10px;
+      font-size: 0.9em;
+    }
+    a {
+      width: 138px;
+      height: 175px;
+      display: block;
+    }
+    
+  }
+}
+mat-card-actions {
+  margin: 0px;
+  padding: 0px;
+}
+.mat-card > .mat-card-actions:last-child {
+  margin-bottom: 0px;
+  padding-bottom: 5px;
+}
+
+.recommend-div {
+  margin: 15px 0px;
+  border-top: 1px solid grey;
+}
+
+// .overview-section, .detail-card {
+//   background: rgb(51, 60, 78);
+// }
+// background: rgb(51, 60, 78);

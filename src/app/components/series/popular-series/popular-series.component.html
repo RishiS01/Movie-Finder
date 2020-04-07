@@ -1,0 +1,49 @@
+<section class="container">
+    <div class="example-container container">
+        <mat-form-field>
+            <input matInput placeholder="Search for Series..." [(ngModel)]="searchStr" (keyup.enter)="searchSeries()">
+            <button mat-button *ngIf="searchStr" matSuffix mat-icon-button aria-label="clear" (click)="searchStr =''">
+                <mat-icon>clear</mat-icon>
+            </button>
+            <button *ngIf="searchStr" matSuffix mat-icon-button aria-label="search" (click)="searchSeries()">
+                <mat-icon>search</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+    <section class="container" *ngIf='searchRes && searchStr '>
+        <ng-masonry-grid [masonryOptions]="masonryOptions" [useAnimation]="true" [useImagesLoaded]="true"
+            [scrollAnimationOptions]="{ animationEffect: 'effect-4', minDuration : 0.4, maxDuration : 0.7 }">
+            <ng-masonry-grid-item id="{{'masonry-item-'+i}}" *ngFor="let series of searchRes; let i = index;"
+                (click)="getSeriesDetail(series.id)">
+                <img src="https://image.tmdb.org/t/p/w500/{{series.backdrop_path}}" alt="{{series.name}}" *ngIf = 'series.backdrop_path'/>
+                <img src="https://image.tmdb.org/t/p/w500/{{series.poster_path}}" alt="{{series.name}}" *ngIf = "!series.backdrop_path && series.poster_path " />
+                <img src="assets/img/not-available.png" alt="{{series.name}}" *ngIf = "!series.poster_path && !series.backdrop_path" />
+                <div class="series-info">
+                    <div>
+                        <strong>{{series.name}}</strong>
+                    </div>
+                    <span><strong>Aired On: </strong>{{series.first_air_date}}</span>
+                </div>
+            </ng-masonry-grid-item>
+        </ng-masonry-grid>
+    </section>
+    <div>
+        <h3>Popular Series</h3>
+    </div>
+    <ng-masonry-grid [masonryOptions]="masonryOptions" [useAnimation]="true" [useImagesLoaded]="true"
+        [scrollAnimationOptions]="{ animationEffect: 'effect-4', minDuration : 0.4, maxDuration : 0.7 }">
+
+        <ng-masonry-grid-item id="{{'masonry-item-'+i}}" *ngFor="let pseries of series; let i = index;"
+            (click)="getSeriesDetail(pseries.id)">
+            <img src="https://image.tmdb.org/t/p/w500/{{pseries.backdrop_path}}" alt="No image" />
+            <div class="series-info">
+                <div>
+                    <strong>{{pseries.name}}</strong>
+                </div>
+                <div>
+                    <span><strong>Aired On: </strong> {{pseries.first_air_date}}</span>
+                </div>
+            </div>
+        </ng-masonry-grid-item>
+    </ng-masonry-grid>
+</section>

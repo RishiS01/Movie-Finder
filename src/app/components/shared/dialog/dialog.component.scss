@@ -1,0 +1,21 @@
+img {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    margin: 10px;
+}
+table {
+    width: 100%;
+    th {
+      color: #673ab7;
+      font-size: medium;
+      span {
+        margin: 10px;
+      }
+    }
+    td {
+      span {
+        margin: 10px;
+      }
+    }
+  }

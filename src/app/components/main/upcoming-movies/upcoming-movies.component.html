@@ -1,0 +1,26 @@
+<section class="container">
+    <div>
+        <h3>Upcoming Movies</h3>
+        <p class="p-date">
+            <strong>From:</strong> {{startDate}} <strong>To:</strong> {{endDate}}
+        </p>
+    </div>
+    <ng-masonry-grid [masonryOptions]="masonryOptions" [useAnimation]="true" [useImagesLoaded]="true"
+        [scrollAnimationOptions]="{ animationEffect: 'effect-4', minDuration : 0.4, maxDuration : 0.7 }">
+
+        <ng-masonry-grid-item id="{{'masonry-item-'+i}}" *ngFor="let upcmovie of upcomingMovies; let i = index;"
+            (click)="getMovieDetail(upcmovie.id)">
+            <img src="https://image.tmdb.org/t/p/w500/{{upcmovie.backdrop_path}}" alt="No image" *ngIf = "upcmovie.backdrop_path"/>
+            <img src="https://image.tmdb.org/t/p/w500/{{upcmovie.poster_path}}" alt="No image" *ngIf = "!upcmovie.backdrop_path">
+            <!-- poster_path -->
+            <div class="movie-info">
+                <div>
+                    <strong>{{upcmovie.title}}</strong>
+                </div>
+                <div>
+                    <span>{{upcmovie.release_date | date: 'mediumDate'}}</span>
+                </div>
+            </div>
+        </ng-masonry-grid-item>
+    </ng-masonry-grid>
+</section>

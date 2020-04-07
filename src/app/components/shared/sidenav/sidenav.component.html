@@ -1,0 +1,20 @@
+<mat-sidenav-container>
+  <mat-sidenav #snav>
+    <mat-nav-list>
+      <a (click)="snav.toggle()" href="" mat-list-item>Close</a>
+      <ul (click)="snav.toggle()">
+        <a mat-list-item routerLink="/upcoming">Upcoming Movies</a>
+        <a mat-list-item routerLink="/popular/movies">Popular Movies</a>
+        <a mat-list-item routerLink="/popular/series">Popular Series</a>
+        <a mat-list-item routerLink="/top-rated">Top-Rated Series</a>
+        <a mat-list-item routerLink="/genres/{{genre.id}}/{{genre.name}}" routerLinkActive="active"
+          *ngFor='let genre of genres'>{{genre.name}}</a>
+      </ul>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

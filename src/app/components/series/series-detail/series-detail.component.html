@@ -1,0 +1,160 @@
+<section>
+    <!-- <div class="overview-section"> -->
+    <div class="row" *ngIf='tvShow'>
+        <!-- <div class="background">
+                <img src = "https://image.tmdb.org/t/p/w500/{{tvShow.backdrop_path}}">
+            </div> -->
+        <div class="col-md-4">
+            <div class="poster-div">
+                <img src="https://image.tmdb.org/t/p/w500/{{tvShow.poster_path}}" alt="{{tvShow.name}}">
+                <div class="mt-5">
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 ">
+            <div class="movie-title">
+                <h2>
+                    {{tvShow.name}}
+                    <mat-chip color="accent" selected>
+                        <strong>{{tvShow.vote_average}}</strong>
+                        <mat-icon>star_rate </mat-icon>
+                    </mat-chip>
+                </h2>
+            </div>
+            <mat-card class="overview-card">
+                <mat-card-header>
+                    <!-- <mat-card-title>{{tvShow.vote_average}}%</mat-card-title> -->
+                    <mat-card-subtitle>First Aired Date:
+                        <strong>{{tvShow.first_air_date | date: 'mediumDate'}}</strong></mat-card-subtitle>
+                    <mat-card-subtitle>Number of Seasons: <strong>{{tvShow.number_of_seasons}}</strong>
+                    </mat-card-subtitle>
+                    <mat-card-subtitle>Number of Episodes: <strong>{{tvShow.number_of_episodes}}</strong>
+                    </mat-card-subtitle>
+                    <mat-card-subtitle>
+                        <mat-chip-list aria-label="Production: ">
+                            Production:
+                            <mat-chip color="warn" selected *ngFor="let production of production_house">
+                                {{production.name}}
+                            </mat-chip>
+                        </mat-chip-list>
+                    </mat-card-subtitle>
+                    <mat-card-subtitle>
+                        <mat-chip-list aria-label="Geners: ">
+                            Geners:
+                            <mat-chip color="primary" selected *ngFor="let gener of geners">
+                                {{gener.name}}
+                            </mat-chip>
+
+                        </mat-chip-list>
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="overview-container">
+                        <h3>OverView</h3>
+                        <p>
+                            {{tvShow.overview}}
+                        </p>
+                    </div>
+                    <!-- <div class="mt-4">
+                            <h3>Featured Crew</h3>
+                            <ul class="credits-div">
+                                <li *ngFor="let credit of credits">
+                                    <a class="crew">
+                                        <img src="https://image.tmdb.org/t/p/w500/{{credit.profile_path}}" alt="">
+                                        <p class="credit-name"><strong>{{credit.name}}</strong></p>
+                                        <p class="credit-role">Creator</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div> -->
+                    <mat-tab-group>
+                        <mat-tab label="Cast">
+                            <div class="m-cast">
+                                <ol class="cast">
+                                    <li *ngFor="let actor of casts">
+                                        <a class="cast" (click)="actorDetails(actor)">
+                                            <img src="https://image.tmdb.org/t/p/w500/{{actor.profile_path}}" alt="">
+                                            <p class="actor-name"><strong>{{actor.name}}</strong></p>
+                                            <p class="actor-character">{{actor.character}}</p>
+                                        </a>
+                                    </li>
+                                    <li class="li-more-credits">
+                                        <div (click)="getMoreCredits('actor')" class="a-more-credits">
+                                            <button mat-fab> More..</button>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Crew">
+                            <div class="m-crew">
+                                <ol class="crew" *ngIf="crews.length > 0; else noData">
+                                    <li *ngFor="let person of crews">
+                                        <a class="crew">
+                                            <img src="https://image.tmdb.org/t/p/w500/{{person.profile_path}}" alt="">
+                                            <p class="actor-name"><strong>{{person.name}}</strong></p>
+                                            <p class="actor-character">{{person.job}}</p>
+                                        </a>
+                                    </li>
+                                    <li class="li-more-credits">
+                                        <div (click)="getMoreCredits('crew')" class="a-more-credits">
+                                            <button mat-fab> More..</button>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </div>
+                            <ng-template #noData>
+                                <h5 class="no-data-msg">No Data</h5>
+                            </ng-template>
+                        </mat-tab>
+                        <mat-tab label="Trailer">
+                            <mat-card>
+                                <div class="container" *ngIf="video">
+                                    <mat-card-content>
+                                        <h2>{{video.name}}</h2>
+                                        <div class="embed-responsive embed-responsive-16by9">
+                                            <iframe class="embed-responsive-item" [src]="video.url"></iframe>
+                                        </div>
+                                    </mat-card-content>
+                                </div>
+                            </mat-card>
+                        </mat-tab>
+                    </mat-tab-group>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+    <!-- </div> -->
+    <div class=" row">
+        <div class="col-md-12 ">
+            <div class="seasons-div">
+                <mat-card class="seasons-card">
+                    <div class="container">
+                        <h2 style="text-align: center">
+                            Seasons
+                        </h2>
+                        <ng-masonry-grid [masonryOptions]="masonryOptions" [useAnimation]="true"
+                            [useImagesLoaded]="true"
+                            [scrollAnimationOptions]="{ animationEffect: 'effect-4', minDuration : 0.4, maxDuration : 0.7 }">
+                            <ng-masonry-grid-item id="{{'masonry-item-'+i}}"
+                                *ngFor="let season of seasons; let i = index;"
+                                (click)="getSeasonDetail(season.id, season.season_number)">
+                                <img src="https://image.tmdb.org/t/p/w500/{{season.poster_path}}" alt="No image" />
+                                <div class="series-info">
+                                    <div>
+                                        <strong>{{season.name}}</strong>
+                                    </div>
+                                    <div>
+                                        <span><strong>Aired On: </strong>
+                                            {{season.air_date | date: 'mediumDate'}}</span>
+                                    </div>
+                                </div>
+                            </ng-masonry-grid-item>
+                        </ng-masonry-grid>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</section>

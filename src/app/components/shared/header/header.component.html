@@ -1,0 +1,8 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <button mat-icon-button (click) = "openSideBar()" fxShow="true" fxHide.gt-sm>
+            <mat-icon>menu</mat-icon>
+        </button>
+        <span routerLink="/">{{title}}</span>
+    </mat-toolbar-row>
+</mat-toolbar>
